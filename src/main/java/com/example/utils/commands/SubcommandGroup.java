@@ -1,6 +1,6 @@
 package com.example.utils.commands;
 
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.SubcommandGroupData;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,23 +15,23 @@ public abstract class SubcommandGroup {
         for (Subcommand subcommand : subcommands)
             commandData.addSubcommands(subcommand.getCommandData());
     }
-    public abstract void execute(SlashCommandInteractionEvent event);
-    public void call(SlashCommandInteractionEvent event) {
-        String subcommandName = event.getSubcommandName();
+    public abstract void execute(SlashCommandInteraction interaction);
+    public void call(SlashCommandInteraction interaction) {
+        String subcommandName = interaction.getSubcommandName();
 
         if (subcommandName == null) {
-            execute(event);
+            execute(interaction);
             return;
         }
 
         for (Subcommand subcommand : subcommands) {
             if (subcommand.getCommandData().getName().equals(subcommandName)) {
-                subcommand.call(event);
+                subcommand.call(interaction);
                 return;
             }
         }
 
-        execute(event);
+        execute(interaction);
     }
     public SubcommandGroupData getCommandData() {
         return commandData;

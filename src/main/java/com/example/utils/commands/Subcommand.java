@@ -1,6 +1,6 @@
 package com.example.utils.commands;
 
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,9 +19,9 @@ public abstract class Subcommand {
 
         commandData.addOptions(options);
     }
-    public abstract void execute(SlashCommandInteractionEvent event);
-    public void call(SlashCommandInteractionEvent event) {
-        execute(event);
+    public abstract void execute(SlashCommandInteraction interaction);
+    public void call(SlashCommandInteraction interaction) {
+        execute(interaction);
     }
     public SubcommandData getCommandData() {
         return commandData;

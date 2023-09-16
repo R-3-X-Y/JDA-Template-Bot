@@ -1,6 +1,6 @@
 package com.example.utils.commands;
 
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -59,21 +59,21 @@ public abstract class SlashCommand {
 
         commandData.addOptions(options);
     }
-    public abstract void execute(SlashCommandInteractionEvent event);
+    public abstract void execute(SlashCommandInteraction interaction);
 
-    public void call(SlashCommandInteractionEvent event) {
-        String subcommandGroupName = event.getSubcommandGroup();
-        String subcommandName = event.getSubcommandName();
+    public void call(SlashCommandInteraction interaction) {
+        String subcommandGroupName = interaction.getSubcommandGroup();
+        String subcommandName = interaction.getSubcommandName();
 
         if (subcommandGroupName == null && subcommandName == null) {
-            execute(event);
+            execute(interaction);
             return;
         }
 
         if (subcommandGroupName != null) {
             for (SubcommandGroup subcommandGroup : subcommandGroups) {
                 if (subcommandGroup.getCommandData().getName().equals(subcommandGroupName)) {
-                    subcommandGroup.call(event);
+                    subcommandGroup.call(interaction);
                     return;
                 }
             }
@@ -82,12 +82,12 @@ public abstract class SlashCommand {
         if (subcommandName != null) {
             for (Subcommand subcommand : subcommands) {
                 if (subcommand.getCommandData().getName().equals(subcommandName)) {
-                    subcommand.call(event);
+                    subcommand.call(interaction);
                     return;
                 }
             }
         }
-        execute(event);
+        execute(interaction);
     }
     public SlashCommandData getCommandData() {
         return commandData;
