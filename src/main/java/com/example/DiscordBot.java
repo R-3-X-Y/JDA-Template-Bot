@@ -8,7 +8,6 @@ import net.dv8tion.jda.api.JDABuilder;
 public class DiscordBot {
     private static final String token = System.getenv("BotToken");
     public static JDA jda;
-
     private static final CommandListener commandListener = new CommandListener();
     private static final ButtonListener buttonListener = new ButtonListener();
 
@@ -22,6 +21,7 @@ public class DiscordBot {
     public static CommandListener getCommandListener() {
         return commandListener;
     }
+
     public static ButtonListener getButtonManager() {
         return buttonListener;
     }

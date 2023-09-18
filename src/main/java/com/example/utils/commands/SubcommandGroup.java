@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class SubcommandGroup {
     private final SubcommandGroupData commandData;
     private final Subcommand[] subcommands;
+
     public SubcommandGroup(@NotNull String name, @NotNull String description, @NotNull Subcommand[] subcommands) {
         this.subcommands = subcommands;
 
@@ -15,7 +16,9 @@ public abstract class SubcommandGroup {
         for (Subcommand subcommand : subcommands)
             commandData.addSubcommands(subcommand.getCommandData());
     }
+
     public abstract void execute(SlashCommandInteraction interaction);
+
     public void call(SlashCommandInteraction interaction) {
         String subcommandName = interaction.getSubcommandName();
 
@@ -33,6 +36,7 @@ public abstract class SubcommandGroup {
 
         execute(interaction);
     }
+
     public SubcommandGroupData getCommandData() {
         return commandData;
     }

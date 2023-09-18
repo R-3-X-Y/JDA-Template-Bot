@@ -7,13 +7,17 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class MessageCommand {
     private final CommandData commandData;
+
     public MessageCommand(@NotNull String name) {
         commandData = Commands.user(name);
     }
+
     public void call(MessageContextInteraction interaction) {
         execute(interaction);
     }
+
     public abstract void execute(MessageContextInteraction interaction);
+
     public CommandData getCommandData() {
         return commandData;
     }

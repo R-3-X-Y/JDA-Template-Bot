@@ -17,6 +17,7 @@ public abstract class SlashCommand {
 
         commandData = Commands.slash(name, description);
     }
+
     public SlashCommand(@NotNull String name, @NotNull String description, @NotNull SubcommandGroup[] subcommandGroups) {
         this.subcommandGroups = subcommandGroups;
         this.subcommands = null;
@@ -27,6 +28,7 @@ public abstract class SlashCommand {
         for (SubcommandGroup subcommandGroup : subcommandGroups)
             commandData.addSubcommandGroups(subcommandGroup.getCommandData());
     }
+
     public SlashCommand(@NotNull String name, @NotNull String description, @NotNull Subcommand[] subcommands) {
         this.subcommandGroups = null;
         this.subcommands = subcommands;
@@ -37,6 +39,7 @@ public abstract class SlashCommand {
         for (Subcommand subcommand : subcommands)
             commandData.addSubcommands(subcommand.getCommandData());
     }
+
     public SlashCommand(@NotNull String name, @NotNull String description, @NotNull SubcommandGroup[] subcommandGroups, @NotNull Subcommand[] subcommands) {
         this.subcommandGroups = subcommandGroups;
         this.subcommands = subcommands;
@@ -59,6 +62,7 @@ public abstract class SlashCommand {
 
         commandData.addOptions(options);
     }
+
     public abstract void execute(SlashCommandInteraction interaction);
 
     public void call(SlashCommandInteraction interaction) {
@@ -89,6 +93,7 @@ public abstract class SlashCommand {
         }
         execute(interaction);
     }
+
     public SlashCommandData getCommandData() {
         return commandData;
     }

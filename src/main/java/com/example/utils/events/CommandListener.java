@@ -21,9 +21,11 @@ public class CommandListener extends ListenerAdapter {
     public void addSlashCommand(SlashCommand slashCommand) {
         slashCommands.add(slashCommand);
     }
+
     public void addMessageCommand(MessageCommand messageCommand) {
         messageCommands.add(messageCommand);
     }
+
     public void addUserCommand(UserCommand userCommand) {
         userCommands.add(userCommand);
     }
@@ -80,5 +82,6 @@ public class CommandListener extends ListenerAdapter {
                 return;
             }
         }
+        System.err.println("[CommandListener]: Unable to find command with name'" + commandName + "'");
     }
 }
